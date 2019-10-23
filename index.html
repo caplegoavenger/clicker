@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Apple clicker!
+        </title>
+        <style>
+        </style>
+        <script>
+            var AppleData = {   
+                amount: 0,
+                pickers: 0,
+                trees: 0,
+            };
+            function every10Apple() {
+                window.setTimeout(() => {
+                        ManualApple()
+                        every10Apple()
+                    }, 10000);
+            }
+            function every1Apple() {
+                window.setTimeout (() => {
+                    ManualApple()
+                    every1Apple()
+                }, 1000);
+            }
+            function ManualApplePickers() {
+                AppleData.pickers = AppleData.pickers + 1;
+                Update();
+                every10Apple();
+            }
+            function ManualAppleTrees() {
+                AppleData.trees = AppleData.trees + 1;
+                Update();
+                every1Apple();
+            }            
+            function Update() {
+                var abi = document.getElementById("AppleBox")
+                abi.innerText = AppleData.amount;
+                var api = document.getElementById("HiredPickers")
+                api.innerText = AppleData.pickers;
+                var ati = document.getElementById("PlantedTrees")
+                ati.innerText = AppleData.trees;
+            document.cookie = (JSON.stringify(AppleData));
+            }
+            function ManualApple() {
+                AppleData.amount = AppleData.amount + 1;
+                Update();
+            }
+            AppleData = JSON.parse(document.cookie);
+
+            for (var p = 0; p < AppleData.pickers; p = p + 1) {
+                every10Apple()
+            }
+            for (var t = 0; t < AppleData.trees; t = t + 1){
+                every1Apple()
+            }
+            window.onload = function() {
+                Update();
+            }
+        </script>
+    </head>
+    <body>
+        Hello there <br/>
+        <img src="apple.png" alt="apple" width="400px" onclick="ManualApple()"/>
+        <span id="AppleBox">0</span> Apples
+        <div onclick="ManualApplePickers()"> <span id="HiredPickers">0</span> Apple Pickers</div>
+        <div onclick="ManualAppleTrees()"><span id="PlantedTrees">0</span> Apple Trees</div>
+        <div onclick="alert(document.cookie)">Show cookie</div>
+        <div onclick="document.cookie = ''">Clear Cookie</div>
+    </body>
+</html>
