@@ -66,13 +66,11 @@
                 ami.innerText = AppleData.makers;
                 var aci = document.getElementById("CodedCoders")
                 aci.innerText = AppleData.coders;
-                // console.log("Watching", AppleData, JSON.stringify(AppleData));
-                // document.cookie = JSON.stringify(AppleData);
-                // console.log('set cookie', document.cookie)
+                document.cookie = JSON.stringify(AppleData);
             }
 
 
-            // AppleData = JSON.parse(document.cookie);
+            AppleData = JSON.parse(document.cookie);
 
             for (var p = 0; p < AppleData.pickers; p = p + 1) {
                 every10Apple()
